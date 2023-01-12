@@ -1,0 +1,33 @@
+server 
+{
+	listen 7070;
+
+	location /
+	{
+		allow GET;
+		root ./serverConfig/autreconf/;
+		index index.html;
+	}
+	location /cookie/
+	{
+		allow GET;
+		root ./serverConfig/autreconf/;
+		index cookies.php;
+		cgi_pass .php /usr/bin/php-cgi;
+	}
+	location /session/
+	{
+		allow GET POST DELETE;
+		root ./serverConfig/autreconf/session/;
+		index session_start.php;
+		cgi_pass .php /usr/bin/php-cgi;
+	}
+
+	location /autre_cgi/
+	{
+		allow GET;
+		root ./serverConfig/autreconf/;
+		index hello.cpp;
+		cgi_pass .cpp ./serverConfig/autreconf/c++_cgi_bin;
+	}
+}
